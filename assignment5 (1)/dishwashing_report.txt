@@ -1,0 +1,93 @@
+
+% Enter the names of your group members below.
+% If you only have 2 group members, leave the last space blank
+%
+%%%%%
+%%%%% NAME: Nathan Ngo
+%%%%% NAME: Kevin Shao
+%%%%% NAME:
+%
+
+%%%%% SECTION: cpu_details
+%%%%% Describe the system you ran your tests on below.
+%%%%% It should include information about the processor (mainly speed), 
+%%%%% amount of RAM, and operator system you ran your tests on.
+
+Chip: Apple M2
+Memory: 16 GB
+OS: macOS
+
+%%%%% SECTION: summary
+%%%%% Summarize your results in 5-10 sentences. Describe which states you tested on, 
+%%%%% which ones ran in a reasonable amount of time (and how long they took), and 
+%%%%% how much speedup you saw when using declarative heuristics. Report any other 
+%%%%% interesting behaviour you saw.
+
+Similar to robocup, we saw a significant difference using declarative heuristics. We tested
+the program using all goal states but only submitted logs for goal states 11,12,13,14,21.
+We test these goal states in both regularly and using declaritive heuristics to compare.
+Results were as expected, looking at different cases displays the effectiveness of 
+declaritive heuristics. For example using declarative heuristics for goal state 14,
+elapsed time was 5.33s, but regular was 16.18s. Without declarative heuristics it took over
+3 times longer to solve. This goes to show how effective and efficient using declarative
+heuristics is.
+
+%%%%% SECTION: log
+%%%%% Show the actual queries you ran below, along with the output
+%%%%% This should include runtime and the actual plan found
+
+--------- heuristic ---------
+(dishwashingInit1)
+?- solve_problem(heuristic, 11, 8, Plan).
+Plan = [addSoap(brush), pickUp(brush, counter)]
+Yes (0.01s cpu, solution 1, maybe more)
+Elapsed time (sec): 0.0
+
+?- solve_problem(heuristic, 12, 8, Plan).
+Plan = [putDown(brush, dish_rack), putDown(sponge, counter), pickUp(brush, counter), pickUp(sponge, dish_rack)]
+Yes (0.01s cpu, solution 1, maybe more)
+Elapsed time (sec): 0.0100000000002183
+
+?- solve_problem(heuristic, 13, 8, Plan).
+Plan = [rinse(g1), scrub(g1, brush), pickUp(g1, counter), addSoap(brush), turnOnFaucet, pickUp(brush, counter)]
+Yes (0.21s cpu, solution 1, maybe more)
+Elapsed time (sec): 0.199999999999818
+
+?- solve_problem(heuristic, 14, 8, Plan).
+Plan = [turnOffFaucet, putDown(g1, dish_rack), rinse(g1), scrub(g1, brush), pickUp(g1, counter), addSoap(brush), turnOnFaucet, pickUp(brush, counter)]
+Yes (5.33s cpu, solution 1, maybe more)
+Elapsed time (sec): 5.32999999999993
+
+(dishwashingInit2)
+?- solve_problem(heuristic, 21, 6, Plan).
+Plan = [rinse(p1), scrub(p1, sponge), pickUp(p1, counter), addSoap(sponge), turnOnFaucet, pickUp(sponge, dish_rack)]
+Yes (0.34s cpu, solution 1, maybe more)
+Elapsed time (sec): 0.340000000000146
+
+--------- regular ---------
+(dishwashingInit1)
+?- solve_problem(regular, 11, 8, Plan).
+Plan = [addSoap(brush), pickUp(brush, counter)]
+Yes (0.00s cpu, solution 1, maybe more)
+Elapsed time (sec): 0.0
+
+?- solve_problem(regular, 12, 8, Plan).
+Plan = [putDown(brush, dish_rack), putDown(sponge, counter), pickUp(brush, counter), pickUp(sponge, dish_rack)]
+Yes (0.01s cpu, solution 1, maybe more)
+Elapsed time (sec): 0.0100000000002183
+
+?- solve_problem(regular, 13, 8, Plan).
+Plan = [rinse(g1), scrub(g1, brush), pickUp(g1, counter), addSoap(brush), turnOnFaucet, pickUp(brush, counter)]
+Yes (0.41s cpu, solution 1, maybe more)
+Elapsed time (sec): 0.399999999999636
+
+?- solve_problem(regular, 14, 8, Plan).
+Plan = [turnOffFaucet, putDown(g1, dish_rack), rinse(g1), scrub(g1, brush), pickUp(g1, counter), addSoap(brush), turnOnFaucet, pickUp(brush, counter)]
+Yes (16.18s cpu, solution 1, maybe more)
+Elapsed time (sec): 16.1800000000003
+
+(dishwashingInit2)
+?- solve_problem(regular, 21, 6, Plan).
+Plan = [rinse(p1), scrub(p1, sponge), pickUp(p1, counter), addSoap(sponge), turnOnFaucet, pickUp(sponge, dish_rack)]
+Yes (0.72s cpu, solution 1, maybe more)
+Elapsed time (sec): 0.720000000000255
